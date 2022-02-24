@@ -1,0 +1,41 @@
+service: collector
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  environment:
+    STAGE: ${self:provider.stage}
+  useDotenv: true
+
+plugins:
+  - serverless-offline
+  - serverless-plugin-typescript
+  - serverless-dotenv-plugin
+
+custom:
+  funcDir: src/framework/functions
+
+functions:
+  saveItauTweetsCron:
+      handler: src/framework/functions/tweets/saveItauTweets.handler
+      timeout: 900
+      events:
+        - schedule: rate(1 hour)
+
+  savePetrobrasTweetsCron:
+      handler: src/framework/functions/tweets/savePetrobrasTweets.handler
+      timeout: 900
+      events:
+        - schedule: rate(1 hour)
+
+  saveB3TweetsCron:
+      handler: src/framework/functions/tweets/saveB3Tweets.handler
+      timeout: 900
+      events:
+        - schedule: rate(1 hour)
+
+  saveBradescoTweetsCron:
+      handler: src/framework/functions/tweets/saveBradescoTweets.handler
+      timeout: 900
+      events:
+        - schedule: rate(1 hour)
