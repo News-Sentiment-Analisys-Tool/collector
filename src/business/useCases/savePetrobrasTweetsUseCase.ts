@@ -31,8 +31,9 @@ export class SavePetrobrasTweetsUseCase {
                             text: text.replace(/[\u0800-\uFFFF]/g, ''),
                             company_id: COMPANY.PETROBRAS
                         } as Tweet)
+                        console.log('saveItauTweetsUseCase::saved', tweet.id)
                     } catch(error) {
-                            console.error("savePetrobrasTweetsUseCase::error", error)
+                        console.error("savePetrobrasTweetsUseCase::error", error)
                     }
                     callback()
                 })  

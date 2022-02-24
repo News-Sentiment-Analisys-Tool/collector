@@ -31,8 +31,9 @@ export class SaveB3TweetsUseCase {
                             text: text.replace(/[\u0800-\uFFFF]/g, ''),
                             company_id: COMPANY.B3
                         } as Tweet)
+                        console.log('saveItauTweetsUseCase::saved', tweet.id)
                     } catch(error) {
-                            console.error("saveB3TweetsUseCase::error", error)
+                        console.log("saveB3TweetsUseCase::error", error)
                     }
                     callback()
                 })  

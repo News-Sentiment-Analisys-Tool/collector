@@ -24,11 +24,17 @@ CREATE TABLE Tweets (
 			ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 
+ALTER TABLE Tweets MODIFY COLUMN created_at VARCHAR(100);
+
 INSERT INTO Company (company_id, name, created_at) VALUES (1, 'itau', now());
 INSERT INTO Company (company_id, name, created_at) VALUES (2, 'petrobras', now());
 INSERT INTO Company (company_id, name, created_at) VALUES (3, 'bradesco', now());
 INSERT INTO Company (company_id, name, created_at) VALUES (4, 'b3', now());
 
-
 SELECT * FROM Company;
-SELECT * FROM Tweets;
+SELECT * FROM Tweets WHERE company_id = 3;
+SELECT * FROM Tweets WHERE id = '1496951663600488450';
+SELECT com.name, COUNT(*) as Tweets FROM Tweets tw
+	INNER JOIN Company com
+    WHERE tw.company_id = com.company_id
+	GROUP BY tw.company_id;

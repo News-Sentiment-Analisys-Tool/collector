@@ -14,7 +14,7 @@ export const TweetModel = sequelize.define('Tweet', {
         allowNull: false
     },
     created_at: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.STRING,
         field: 'created_at',
         allowNull: false
     },

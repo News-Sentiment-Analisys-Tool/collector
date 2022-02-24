@@ -6,7 +6,6 @@ export const sequelize = new Sequelize(
     process.env.PASSWORD, {
         dialect: 'mysql',
         host: process.env.HOST,
-        port: parseInt(process.env.PORT!),
-        logging: false
+        port: parseInt(process.env.PORT!)
     }
 )
