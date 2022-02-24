@@ -1,4 +1,7 @@
 export interface Tweet {
+    id: string
     text: string
-    createdAt: Date
+    created_at: Date
+    author_id: string
+    company_id: number
 }
