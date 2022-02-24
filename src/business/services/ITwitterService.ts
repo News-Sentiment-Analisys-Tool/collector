@@ -1,5 +1,6 @@
 import { Tweet } from "../../domain/entities/tweet";
 
 export interface ITwitterService {
-    listBetweenDate(begin: Date, end: Date): Promise<Tweet[]>
+    listByCompany(keywords: string[]): Promise<Tweet[]>
+    getUsername(author_id: string): Promise<string>
 }
