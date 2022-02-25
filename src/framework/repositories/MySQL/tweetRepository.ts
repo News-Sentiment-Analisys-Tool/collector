@@ -8,4 +8,12 @@ export class TweetRepository implements ITweetRepository {
             ...tweet
         })
     }
+
+    async saveMany(tweets: any[]): Promise<void> {
+        await TweetModel.bulkCreate(
+        tweets,
+        {
+            ignoreDuplicates: true
+        })
+    }
 }

@@ -8,6 +8,6 @@ exports.handler = async event => {
     
   const saveB3TweetsController = new SaveB3TweetsController()
 
-  return saveB3TweetsController.run()
+  await saveB3TweetsController.run()
   
 };

@@ -8,6 +8,6 @@ exports.handler = async event => {
     
   const savePetrobrasTweetsController = new SavePetrobrasTweetsController()
 
-  return savePetrobrasTweetsController.run()
+  await savePetrobrasTweetsController.run()
   
 };

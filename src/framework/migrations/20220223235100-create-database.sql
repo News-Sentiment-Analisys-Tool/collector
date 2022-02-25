@@ -31,10 +31,9 @@ INSERT INTO Company (company_id, name, created_at) VALUES (2, 'petrobras', now()
 INSERT INTO Company (company_id, name, created_at) VALUES (3, 'bradesco', now());
 INSERT INTO Company (company_id, name, created_at) VALUES (4, 'b3', now());
 
-SELECT * FROM Company;
-SELECT * FROM Tweets WHERE company_id = 3;
-SELECT * FROM Tweets WHERE id = '1496951663600488450';
 SELECT com.name, COUNT(*) as Tweets FROM Tweets tw
 	INNER JOIN Company com
     WHERE tw.company_id = com.company_id
 	GROUP BY tw.company_id;
+    
+SELECT COUNT(*) FROM Tweets WHERE company_id = null;

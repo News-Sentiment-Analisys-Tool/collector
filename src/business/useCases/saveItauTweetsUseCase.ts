@@ -20,23 +20,18 @@ export class SaveItauTweetsUseCase {
             console.log('saveItauTweetsUseCase::tweets amount', this.tweets.length)
             console.log('saveItauTweetsUseCase::tweets', this.tweets)
 
-            async.eachLimit(
-                this.tweets,
-                250,
-                async (tweet, callback) => {                    
-                    try {
-                        const { text } = tweet
-                        await this.tweetRepository.save({
-                            ...tweet,
-                            text: text.replace(/[\u0800-\uFFFF]/g, ''),
-                            company_id: COMPANY.ITAU
-                        } as Tweet)
-                        console.log('saveItauTweetsUseCase::saved', tweet.id)
-                    } catch(error) {
-                        console.log("saveItauTweetsUseCase::error", error)
-                    }
-                    callback()
-                })  
+            const tweets = this.tweets.map(tweet => {
+                const { text } = tweet
+                return {
+                    ...tweet,
+                    text: text.replace(/[\u0800-\uFFFF]/g, ''),
+                    company_id: COMPANY.ITAU
+                } as Tweet
+            })
+
+            await this.tweetRepository.saveMany(tweets)
+            console.log('saveItauTweetsUseCase::saved')
+
         } catch (error) {
             return Promise.resolve({
                 success: false,

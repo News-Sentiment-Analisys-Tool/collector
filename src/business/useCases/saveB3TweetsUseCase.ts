@@ -20,23 +20,18 @@ export class SaveB3TweetsUseCase {
             console.log('saveB3TweetsUseCase::tweets amount', this.tweets.length)
             console.log('saveB3TweetsUseCase::tweets', this.tweets)
 
-            async.eachLimit(
-                this.tweets,
-                250,
-                async (tweet, callback) => {                    
-                    try {
-                        const { text } = tweet
-                        await this.tweetRepository.save({
-                            ...tweet,
-                            text: text.replace(/[\u0800-\uFFFF]/g, ''),
-                            company_id: COMPANY.B3
-                        } as Tweet)
-                        console.log('saveItauTweetsUseCase::saved', tweet.id)
-                    } catch(error) {
-                        console.log("saveB3TweetsUseCase::error", error)
-                    }
-                    callback()
-                })  
+            const tweets = this.tweets.map(tweet => {
+                const { text } = tweet
+                return {
+                    ...tweet,
+                    text: text.replace(/[\u0800-\uFFFF]/g, ''),
+                    company_id: COMPANY.B3
+                } as Tweet
+            })
+
+            await this.tweetRepository.saveMany(tweets)
+            console.log('saveB3TweetsUseCase::saved')
+
         } catch (error) {
             return Promise.resolve({
                 success: false,

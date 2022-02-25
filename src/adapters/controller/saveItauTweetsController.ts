@@ -4,7 +4,7 @@ import { TweetRepository } from '../../framework/repositories/MySQL/tweetReposit
 import { TwitterService } from '../../framework/services/twitterService'
 
 export class SaveItauTweetsController {
-    async run ():Promise<any> {
+    async run ():Promise<void> {
         try {
             const tweetRepositoryInMemory = new TweetRepository()
             const twitterService = new TwitterService()
@@ -16,30 +16,12 @@ export class SaveItauTweetsController {
     
             await this.handleDBConnection()
             
-            const success = await saveItauTweetsUseCase.execute()
-
-            return {
-                statusCode: 200,
-                body: JSON.stringify({
-                    body: {
-                        message: {},
-                        success
-                    }
-                })
-            }
+            await saveItauTweetsUseCase.execute()
 
         } catch (error) {
             console.log({
                 error
             })
-
-            return {
-                statusCode: 500,
-                body: JSON.stringify({
-                    message: error,
-                    success: false
-                })
-            }
         }
     }
 
