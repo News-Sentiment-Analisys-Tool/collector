@@ -6,6 +6,19 @@ provider:
   environment:
     STAGE: ${self:provider.stage}
   useDotenv: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - 'translate:*'
+      Resource: '*'
+    - Effect: Allow
+      Action:
+        - sqs:DeleteMessage
+        - sqs:SendMessage
+        - sqs:ReceiveMessage
+        - sqs:GetQueueUrl
+        - sqs:changeMessageVisibility
+      Resource: '*'
 
 plugins:
   - serverless-offline
