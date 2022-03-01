@@ -3,7 +3,7 @@ import { ILoughramMcdonaldRepository } from '../../../../business/repositories/I
 import * as fs from "fs"
 import * as path from "path"
 import * as csv from 'csv-parser'
-const lexicon = require('./dictionaries/LoughranMcDonald_MasterDictionary_2020.json')
+import axios from 'axios'
 
 export class LoughramMcDonaldRepository implements ILoughramMcdonaldRepository {
 
@@ -11,7 +11,6 @@ export class LoughramMcDonaldRepository implements ILoughramMcdonaldRepository {
 
     load():void {
         const filePath = path.resolve(__dirname, 'dictionaries/LoughranMcDonald_MasterDictionary_2020')
-
         fs.createReadStream(filePath + '.csv')
         .pipe(csv())
         .on('data', (data: Word) => this.words.push(data))
@@ -20,7 +19,16 @@ export class LoughramMcDonaldRepository implements ILoughramMcdonaldRepository {
         });
     }
 
-    list():Word[] {
+    async list(): Promise<object> {
+        let lexicon = {}
+
+        const response = await axios.get('https://raw.githubusercontent.com/News-Sentiment-Analisys-Tool/collector/feature/%235-Analisador-de-dados/src/framework/repositories/Csv/LoughramMcdonald/dictionaries/LoughranMcDonald_MasterDictionary_2020.json')
+        
+        const lexiconJson = response.data
+        
+        for (const word of lexiconJson) {
+            lexicon[word.Word] = word
+        }
         return lexicon
     }
 }

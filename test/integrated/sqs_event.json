@@ -1,0 +1,20 @@
+{
+    "Records": [
+      {
+        "messageId": "19dd0b57-b21e-4ac1-bd88-01bbb068cb78",
+        "receiptHandle": "MessageReceiptHandle",
+        "body": "[{\"id\":\"1494238337502269441\",\"text\":\"ETFdefinançasdescentralizadasDEFI11captaR$55,5milhõeseestreiahojenaB3\\nhttps://t.co/H9Mg38xuRy\",\"created_at\":\"2022-02-1700:00:00\",\"author_id\":\"1113533606247436289\",\"company_id\":4},{\"id\":\"1494277011921154051\",\"text\":\"@consjoeljrQueenormecoincidênciapraumacidadequeésededoBradesco\",\"created_at\":\"2022-02-1700:00:00\",\"author_id\":\"2324619756\",\"company_id\":3},{\"id\":\"1494280470313504772\",\"text\":\"Dia14/02vivemosmaisummomentoqueentrouparaanossahistória.Nossotime,emparceriacoma@B3_Oficial,bateuosinonolançamentode6novosBDRsdeETFsderendafixalistadosembolsasnorte-americanas.Esseémaisumpassonademocratizaçãodo#investimentonoexteriorhttps://t.co/RxAmb5PImL\",\"created_at\":\"2022-02-1700:00:00\",\"author_id\":\"1414941720521883648\",\"company_id\":4},{\"id\":\"1494288929838751752\",\"text\":\"@CarlosBomfim9AceitamoscartõesdedébitoVisaeEloemitidospelosseguintesbancos:\\nVisa:Itaú,Bradesco,BancodoBrasil,CaixaEconômicaFederal(cartãovirtual)eSicredi\\nELO:BancodoBrasileCaixaEconômicaFederal(cartãovirtual)\\nVocêestáutilizandoalgumdesses?\\n-Tai\",\"created_at\":\"2022-02-1700:00:00\",\"author_id\":\"85741735\",\"company_id\":3},{\"id\":\"1494290885613428736\",\"text\":\"ConheçaoQDFI11,ETFdeDeFiquecompletaprimeirasemanadenegociaçãonaB3\\nhttps://t.co/tFtvqMLmA2\",\"created_at\":\"2022-02-1700:00:00\",\"author_id\":\"854373135528992769\",\"company_id\":4},{\"id\":\"1494295626829512707\",\"text\":\"Importaçõespassaramde22%daofertanacionalem2000para47%em2021.\\n\\nhttps://t.co/tsZugxeqDq\",\"created_at\":\"2022-02-1700:00:00\",\"author_id\":\"20450814\",\"company_id\":2},{\"id\":\"1494297735104765953\",\"text\":\"Começaasernegociadonestaquinta-feiranaBolsabrasileiraB3onovofundodeíndicedaHashdex,oDEFI11,definançasdescentralizadas:\\n\\nhttps://t.co/NlNBtukrTm\",\"created_at\":\"2022-02-1700:00:00\",\"author_id\":\"1377741813151371264\",\"company_id\":4},{\"id\":\"1494310192992997380\",\"text\":\"Ummercadode$240bilhõesatéomomento,maisdoquenecessárioemumpaíscomooBrasil.\\n\\nhttps://t.co/j4dH5MHKCI\",\"created_at\":\"2022-02-1700:00:00\",\"author_id\":\"2324619756\",\"company_id\":4},{\"id\":\"1494333266790285314\",\"text\":\"ExpulsãodediplomataamericanodaRússiarespinganaB3\\nhttps://t.co/bKUTlP8rlC\",\"created_at\":\"2022-02-1700:00:00\",\"author_id\":\"42962996\",\"company_id\":4},{\"id\":\"1494341262039662592\",\"text\":\"OQDFI11,1ºETFdeDeFidomundo,completousua\\nprimeirasemanadenegociaçãonaB3.OETFdaQRAssetManagementtemtaxadeadministraçãode0,9%eofereceexposiçãoaumacategoriaquejámovimenta$240bilhõesdedólares\\nhttps://t.co/tFtvqMtLbs\",\"created_at\":\"2022-02-1700:00:00\",\"author_id\":\"854373135528992769\",\"company_id\":4}]",
+        "attributes": {
+          "ApproximateReceiveCount": "1",
+          "SentTimestamp": "1523232000000",
+          "SenderId": "123456789012",
+          "ApproximateFirstReceiveTimestamp": "1523232000001"
+        },
+        "messageAttributes": {},
+        "md5OfBody": "{{{md5_of_body}}}",
+        "eventSource": "aws:sqs",
+        "eventSourceARN": "arn:aws:sqs:us-east-1:123456789012:MyQueue",
+        "awsRegion": "us-east-1"
+      }
+    ]
+  }

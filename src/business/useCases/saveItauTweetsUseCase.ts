@@ -2,7 +2,7 @@ import async from 'async'
 import { ITweetRepository } from '../repositories/ITweetRepository'
 import { ITwitterService } from '../services/ITwitterService'
 import { Tweet } from '../../domain/entities/tweet'
-import { COMPANY } from '../constants/company'
+import { COMPANY } from '../../domain/constants/company'
 
 export class SaveItauTweetsUseCase {
     

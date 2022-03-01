@@ -1,5 +1,5 @@
 import * as AWS from 'aws-sdk'
-import { Language } from '../../business/constants/language'
+import { Language } from '../../domain/constants/language'
 import { ITranslateService } from '../../business/services/ITranslateService'
 
 export class AwsTranslateService implements ITranslateService {

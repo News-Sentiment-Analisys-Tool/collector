@@ -1,8 +1,9 @@
 import { Tweet } from '../../domain/entities/tweet'
+import { Information } from '../../domain/entities/information'
 import { ITranslateService } from '../services/ITranslateService'
 import { ILoughramMcdonaldRepository } from '../repositories/ILoughramMcdonaldRepository'
 import { IInfomationRepository } from '../repositories/IInformationRepository'
-import { HandlePreProcessingUseCase } from './handlePreProcessmentUseCase' 
+import { HandlePreProcessingUseCase } from './handlePreProcessmentUseCase'
 
 export class AnalyseInformationUseCase {
     constructor (
@@ -11,29 +12,43 @@ export class AnalyseInformationUseCase {
         private readonly informationRepository: IInfomationRepository
     ) {}
 
+    private informations: Information[] = []
+
     async execute(tweets: Tweet[]): Promise<void> {
-        const handlePreProcessmentUseCase = new HandlePreProcessingUseCase(tweets[8].text, this.translateService)
+        const dictionary = await this.loughramMcDonaldRepository.list()
 
-        const setence = await handlePreProcessmentUseCase.getPreProcessedSetence()
+        for (const tweet of tweets) {
+            const handlePreProcessmentUseCase = new HandlePreProcessingUseCase(tweet.text, this.translateService)
 
-        const words = this.loughramMcDonaldRepository.list()
+            const sentence = await handlePreProcessmentUseCase.getPreProcessedSetence()
 
-        let dictionary = {}
-        let score
+            let sentimentScore = 0
 
-        for (const word of words) {
-            dictionary[word.Word] = word
-        }
-        console.log(setence)
-        for (const word of setence.split(' ')) {
-            score = 0
-            let wordObj = dictionary[word.toUpperCase()]
-            
-            if (wordObj) {
-                if (wordObj.Positive === '2009') score += 1
-                if (wordObj.Negative === '2009') score -= 1
-                console.log(wordObj.Word, 'Final Score: ', score)
-            }   
+            let text = sentence
+
+            for (const word of text.split(' ')) {
+                let wordObj = dictionary[word.toUpperCase()]
+                
+                if (wordObj) {
+                    if (wordObj.Positive === '2009') sentimentScore += 1
+                    if (wordObj.Negative === '2009') sentimentScore -= 1
+                    //console.log(wordObj.Word, sentimentScore)
+                }   
+            }
+    
+            const information: Information = {
+                id: tweet.id,
+                text: sentence,
+                source_id: 1,
+                company_id: tweet.company_id,
+                language: 'en',
+                sentimentScore: sentimentScore,
+                created_at: tweet.created_at
+            }
+
+            this.informations.push(information)
+
+            console.log(information)
         }
     }
 }

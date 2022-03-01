@@ -39,3 +39,23 @@ functions:
       timeout: 900
       events:
         - schedule: rate(1 hour)
+
+  analyseInformation:
+      handler: src/framework/functions/analyser/analyseInformation.handler
+      timeout: 900
+      events:
+        - sqs:
+            arn:
+              Fn::GetAtt:
+                - InformationToBeAnalysedSqsQueueName
+                - Arn
+            batchSize: 1
+
+resources:
+  Resources:
+    InformationToBeAnalysedSqsQueueName:
+        Type: AWS::SQS::Queue
+        Properties:
+          QueueName: informationToBeAnalysedSqsQueueName
+          MessageRetentionPeriod: 864000 #10 days in retention message
+          VisibilityTimeout: 300 #5 minutes
