@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --transpile-only --respawn --ignore-watch node_modules -r dotenv/config src/main.ts",
+    "sqs": "sls invoke local -f analyseInformation -p test/integrated/sqs_event.json",
     "start": "sls offline"
   },
   "devDependencies": {
