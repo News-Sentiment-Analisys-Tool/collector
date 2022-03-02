@@ -1,5 +1,5 @@
 CREATE DATABASE
-	IF NOT EXISTS heroku_0314839b72389eb;    
+	IF NOT EXISTS heroku_0314839b72389eb;
 
 USE heroku_0314839b72389eb;
 
@@ -23,17 +23,3 @@ CREATE TABLE Tweets (
 			ON DELETE CASCADE
 			ON UPDATE CASCADE
 ) ENGINE = InnoDB;
-
-ALTER TABLE Tweets MODIFY COLUMN created_at VARCHAR(100);
-
-INSERT INTO Company (company_id, name, created_at) VALUES (1, 'itau', now());
-INSERT INTO Company (company_id, name, created_at) VALUES (2, 'petrobras', now());
-INSERT INTO Company (company_id, name, created_at) VALUES (3, 'bradesco', now());
-INSERT INTO Company (company_id, name, created_at) VALUES (4, 'b3', now());
-
-SELECT com.name, COUNT(*) as Tweets FROM Tweets tw
-	INNER JOIN Company com
-    WHERE tw.company_id = com.company_id
-	GROUP BY tw.company_id;
-    
-SELECT COUNT(*) FROM Tweets WHERE company_id = null;
