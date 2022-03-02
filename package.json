@@ -5,7 +5,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --transpile-only --respawn --ignore-watch node_modules -r dotenv/config src/main.ts",
-    "sqs": "sls invoke local -f analyseInformation -p test/integrated/sqs_event.json",
+    "exec:sqs": "sls invoke local -f analyseInformation -p test/integrated/sqs_event.json",
+    "exec:cron:local": "sls invoke local -f saveB3TweetsCron",
+    "exec:cron:dev": "sls invoke -f saveB3TweetsCron",
     "start": "sls offline"
   },
   "devDependencies": {

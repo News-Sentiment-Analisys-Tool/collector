@@ -8,7 +8,7 @@ SELECT com.name, COUNT(*) as Information FROM Information inf
     WHERE inf.company_id = com.company_id
 	GROUP BY inf.company_id;
     
-SELECT COUNT(*) FROM Informations WHERE company_id = null;
+SELECT COUNT(*) FROM Information;
 
 SELECT com.name, COUNT(*) as Tweets FROM Tweets tw
 	INNER JOIN Company com
