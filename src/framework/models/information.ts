@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize'
 import { sequelize } from '../database/mysql'
 
-export const InformationModel = sequelize.define('Informations', {
+export const InformationModel = sequelize.define('Information', {
     id: {
         type: DataTypes.STRING,
         field: 'id',
@@ -20,7 +20,7 @@ export const InformationModel = sequelize.define('Informations', {
     },
     source_id: {
         type: DataTypes.NUMBER,
-        field: 'author_id',
+        field: 'source_id',
         allowNull: false
     },
     company_id: {
@@ -42,6 +42,8 @@ export const InformationModel = sequelize.define('Informations', {
     {
         timestamps: false,
         createdAt: false,
-        updatedAt: false
+        updatedAt: false,
+        freezeTableName: true,
+        tableName: 'Information'
     }
 )

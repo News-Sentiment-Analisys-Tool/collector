@@ -7,5 +7,5 @@ export interface Information {
     source_id: number
     company_id: number
     language: Language
-    sentimentScore: number
+    sentiment_score: number
 }
