@@ -1,6 +1,7 @@
 import { SavePetrobrasTweetsUseCase } from '../../business/useCases/savePetrobrasTweetsUseCase'
 import { sequelize } from '../../framework/database/mysql';
 import { TweetRepository } from '../../framework/repositories/MySQL/tweetRepository'
+import { SqsService } from '../../framework/services/sqsService'
 import { TwitterService } from '../../framework/services/twitterService'
 
 export class SavePetrobrasTweetsController {
@@ -8,15 +9,17 @@ export class SavePetrobrasTweetsController {
         try {
             const tweetRepositoryInMemory = new TweetRepository()
             const twitterService = new TwitterService()
+            const sqsService = new SqsService()
         
-            const saveItauTweetsUseCase = new SavePetrobrasTweetsUseCase(
+            const savePetrobrasTweetsUseCase = new SavePetrobrasTweetsUseCase(
                 tweetRepositoryInMemory,
-                twitterService
+                twitterService,
+                sqsService
             )
     
             await this.handleDBConnection()
             
-            await saveItauTweetsUseCase.execute()
+            await savePetrobrasTweetsUseCase.execute()
 
         } catch (error) {
             console.log({

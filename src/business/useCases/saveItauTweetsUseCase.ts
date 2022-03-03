@@ -1,16 +1,19 @@
 import async from 'async'
 import { ITweetRepository } from '../repositories/ITweetRepository'
 import { ITwitterService } from '../services/ITwitterService'
+import { IMessageService } from '../services/IMessageService'
 import { Tweet } from '../../domain/entities/tweet'
-import { COMPANY } from '../constants/company'
+import { COMPANY } from '../../domain/constants/company'
 
 export class SaveItauTweetsUseCase {
     
     constructor(
         private tweetRepository: ITweetRepository,
         private twitterService: ITwitterService,
+        private messageService: IMessageService,
     ) {}
 
+    private queueName:string = 'informationToBeAnalysedSqsQueueName'
     private company:string[] = ['itau', 'ITUB4']
     private tweets:Tweet[]
 
@@ -31,6 +34,9 @@ export class SaveItauTweetsUseCase {
 
             await this.tweetRepository.saveMany(tweets)
             console.log('saveItauTweetsUseCase::saved')
+
+            await this.messageService.send(this.queueName, JSON.stringify(tweets))
+            console.log('saveItauTweetsUseCase::tweets message sent')
 
         } catch (error) {
             return Promise.resolve({

@@ -1,22 +1,26 @@
 import { SaveBradescoTweetsUseCase } from '../../business/useCases/saveBradescoTweetsUseCase'
 import { sequelize } from '../../framework/database/mysql';
 import { TweetRepository } from '../../framework/repositories/MySQL/tweetRepository'
+import { SqsService } from '../../framework/services/sqsService'
 import { TwitterService } from '../../framework/services/twitterService'
+
 
 export class SaveBradescoTweetsController {
     async run ():Promise<void> {
         try {
             const tweetRepositoryInMemory = new TweetRepository()
             const twitterService = new TwitterService()
+            const sqsService = new SqsService()
         
-            const saveItauTweetsUseCase = new SaveBradescoTweetsUseCase(
+            const saveBradescoTweetsUseCase = new SaveBradescoTweetsUseCase(
                 tweetRepositoryInMemory,
-                twitterService
+                twitterService,
+                sqsService
             )
-    
+
             await this.handleDBConnection()
             
-            await saveItauTweetsUseCase.execute()
+            await saveBradescoTweetsUseCase.execute()
 
         } catch (error) {
             console.log({

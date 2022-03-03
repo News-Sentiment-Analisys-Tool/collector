@@ -6,6 +6,19 @@ provider:
   environment:
     STAGE: ${self:provider.stage}
   useDotenv: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - 'translate:*'
+      Resource: '*'
+    - Effect: Allow
+      Action:
+        - sqs:DeleteMessage
+        - sqs:SendMessage
+        - sqs:ReceiveMessage
+        - sqs:GetQueueUrl
+        - sqs:changeMessageVisibility
+      Resource: '*'
 
 plugins:
   - serverless-offline
@@ -39,3 +52,32 @@ functions:
       timeout: 900
       events:
         - schedule: rate(1 hour)
+
+  analyseInformation:
+      handler: src/framework/functions/analyser/analyseInformation.handler
+      timeout: 900
+      events:
+        - sqs:
+            arn:
+              Fn::GetAtt:
+                - InformationToBeAnalysedSqsQueueName
+                - Arn
+            batchSize: 1
+
+  getSentimentScores:
+      handler: src/framework/functions/report/getSentimentScores.handler
+      timeout: 900
+      events:
+        - http:
+            path: /report
+            method: GET
+            cors: true
+
+resources:
+  Resources:
+    InformationToBeAnalysedSqsQueueName:
+        Type: AWS::SQS::Queue
+        Properties:
+          QueueName: informationToBeAnalysedSqsQueueName
+          MessageRetentionPeriod: 864000 #10 days in retention message
+          VisibilityTimeout: 300 #5 minutes
