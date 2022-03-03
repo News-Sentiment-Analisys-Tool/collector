@@ -4,3 +4,5 @@ export const COMPANY = {
     BRADESCO: 3,
     B3: 4
 }
+
+export type Company = 1 | 2 | 3 | 4

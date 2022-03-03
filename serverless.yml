@@ -64,6 +64,15 @@ functions:
                 - Arn
             batchSize: 1
 
+  getSentimentScores:
+      handler: src/framework/functions/report/getSentimentScores.handler
+      timeout: 900
+      events:
+        - http:
+            path: /report
+            method: GET
+            cors: true
+
 resources:
   Resources:
     InformationToBeAnalysedSqsQueueName:
