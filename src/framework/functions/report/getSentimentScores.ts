@@ -18,6 +18,11 @@ exports.handler = async (
     const informations = await getSentimentScoresController.run(inputGetSentimentScoresDto)
 
     return {
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Methods': '*',
+            'Access-Control-Allow-Origin': '*',
+        },
         statusCode: 200,
         body: JSON.stringify(informations)
     }
