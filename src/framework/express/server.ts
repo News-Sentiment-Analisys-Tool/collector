@@ -26,9 +26,7 @@ route.get('/report', async (req: Request, res: Response) => {
 
     const informations = await getSentimentScoresController.run(inputGetSentimentScoresDto)
 
-    res.json({
-        ...informations
-    })
+    res.json(informations)
 })
 
 app.use(route)
