@@ -1,19 +1,21 @@
 {
   "name": "collector",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/framework/express/server.ts",
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --transpile-only --respawn --ignore-watch node_modules -r dotenv/config src/main.ts",
     "exec:sqs": "sls invoke local -f analyseInformation -p test/integrated/sqs_event.json",
     "exec:cron:local": "sls invoke local -f saveB3TweetsCron",
     "exec:cron:dev": "sls invoke -f savePetrobrasTweetsCron",
-    "start": "sls offline"
+    "start": "ts-node -r dotenv/config src/framework/express/server.ts",
+    "serve": "ts-node-dev --transpile-only --respawn --ignore-watch node_modules -r dotenv/config src/framework/express/server.ts"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.93",
     "@types/axios": "^0.14.0",
-    "@types/node": "^17.0.17",
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.23",
     "serverless-dotenv-plugin": "^3.12.2",
     "serverless-offline": "^8.5.0",
     "serverless-plugin-typescript": "^2.1.1",
@@ -26,10 +28,13 @@
     "aws-lambda": "^1.0.7",
     "aws-sdk": "^2.1082.0",
     "axios": "^0.25.0",
+    "cors": "^2.8.5",
     "csv-parser": "^3.0.0",
     "dotenv": "^16.0.0",
+    "express": "^4.17.3",
     "mysql2": "^2.3.3",
     "node-cron": "^3.0.0",
-    "sequelize": "^6.16.1"
+    "sequelize": "^6.16.1",
+    "ts-node": "^10.7.0"
   }
 }

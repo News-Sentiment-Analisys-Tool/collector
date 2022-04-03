@@ -53,16 +53,16 @@ functions:
       events:
         - schedule: rate(1 hour)
 
-  analyseInformation:
-      handler: src/framework/functions/analyser/analyseInformation.handler
-      timeout: 900
-      events:
-        - sqs:
-            arn:
-              Fn::GetAtt:
-                - InformationToBeAnalysedSqsQueueName
-                - Arn
-            batchSize: 1
+  # analyseInformation:
+  #     handler: src/framework/functions/analyser/analyseInformation.handler
+  #     timeout: 900
+  #     events:
+  #       - sqs:
+  #           arn:
+  #             Fn::GetAtt:
+  #               - InformationToBeAnalysedSqsQueueName
+  #               - Arn
+  #           batchSize: 1
 
   getSentimentScores:
       handler: src/framework/functions/report/getSentimentScores.handler
